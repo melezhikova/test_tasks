@@ -10,7 +10,7 @@ function TaskEdit () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { task, loading, error } = useSelector(state => state.task);
+    const { task, loading, error, errorMsg, success } = useSelector(state => state.task);
     const { tasks } = useSelector(state => state.tasksList);
     const { token } = useSelector(state => state.user);
     const currentTask = tasks.find(o => o.id === params.id * 1);
@@ -20,10 +20,14 @@ function TaskEdit () {
         dispatch(setTask(currentTask));
     }, [dispatch, currentTask])
 
+    useEffect(() => {
+        if(success) {
+          navigate ("/")
+    }}, [success, navigate]);
+
     const handleSubmit = evt => {
         evt.preventDefault();
-        editTask(dispatch, task.id, task.username, task.email, task.text, task.status, token)
-        .then(() => navigate ("/"));
+        editTask(dispatch, task.id, task.username, task.email, task.text, task.status, token);
     }
 
     const handleCancel = () => {
@@ -49,7 +53,11 @@ function TaskEdit () {
     }
     
     if (error) {
-        return <div className="errorMessage">Произошла ошибка!</div>;
+        return (
+          <div className='errorMessage'>Произошла ошибка!
+            {errorMsg && <div>{errorMsg}</div>}
+          </div>
+        )
     }
     
 

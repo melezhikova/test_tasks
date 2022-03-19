@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTasks, setPage } from '../actions/actionCreators';
+import { clearSuccess, fetchTasks, setPage } from '../actions/actionCreators';
 import { TailSpin } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import Task from './Task';
@@ -14,6 +14,7 @@ function HomePage() {
 
   useEffect(() => {
     fetchTasks(dispatch, sort, currentPage);
+    dispatch(clearSuccess());
   }, [dispatch, sort, currentPage])
 
   const prevPage = () => {

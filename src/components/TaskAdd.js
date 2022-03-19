@@ -1,14 +1,22 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeTaskField, addTask } from '../actions/actionCreators';
 import { TailSpin } from  'react-loader-spinner';
 import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import store from '../store';
 
 function TaskAdd() {
 
-  const { task, loading, error, errorMsg } = useSelector(state => state.task);
+  const { task, loading, error, errorMsg, success } = useSelector(state => state.task);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(store.getState());
+    if(success) {
+      navigate ("/");
+  }}, [success, navigate]);
+
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -18,8 +26,7 @@ function TaskAdd() {
   const handleSubmit = evt => {
     evt.preventDefault();
     addTask(dispatch, task.username, task.email, task.text , task.status)
-    .then(() => navigate ("/"));
-  }
+  };
 
   if (loading) {
     return (

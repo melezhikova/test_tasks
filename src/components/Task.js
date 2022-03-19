@@ -19,9 +19,9 @@ function Task (props) {
             <td>{(task.status === 10 || task.status === 11) ? 'V' : null}</td>
             <td>
             {currentUser && currentUser === "admin" &&
-                    <Link to={`/tasks/${task.id}`}>
-                        <button className="editbtn"></button>
-                    </Link>
+                <Link to={`/tasks/${task.id}`}>
+                    <button className="editbtn"></button>
+                </Link>
             }
             </td>
         </tr>

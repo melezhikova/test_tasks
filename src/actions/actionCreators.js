@@ -18,6 +18,7 @@ import {
   SET_USER_SUCCESS,
   CHANGE_USER_FIELD,
   CLEAR_TOKEN,
+  CLEAR_SUCCESS,
 } from './actionTypes';
 
 export const fetchTasksRequest = () => ({
@@ -138,6 +139,10 @@ export const changeUserField = (name, value) => ({
 
 export const clearToken = () => ({
   type: CLEAR_TOKEN,
+});
+
+export const clearSuccess = () => ({
+  type: CLEAR_SUCCESS,
 })
 
 export const fetchTasks = async (dispatch, sort, currentPage) => {

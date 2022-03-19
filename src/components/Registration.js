@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react';
 import { changeUserField, clearToken, setUser } from '../actions/actionCreators';
 
 function Registration () {
